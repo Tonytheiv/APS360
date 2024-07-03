@@ -1,0 +1,5 @@
+train: /home/tony/APS360/src/datasets/ucy/train
+val: /home/tony/APS360/src/datasets/ucy/val
+
+nc: 1  # Number of classes
+names: ['pedestrian']  # Class names

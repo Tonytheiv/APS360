@@ -1,0 +1,3 @@
+[submodule "src/ETH-UCY-Preprocessing"]
+	path = src/ETH-UCY-Preprocessing
+	url = git@github.com:Tonytheiv/ETH-UCY-Preprocessing.git
