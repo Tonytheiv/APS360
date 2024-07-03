@@ -1,0 +1,106 @@
+{
+    "os": "Linux-5.15.0-88-generic-x86_64-with-glibc2.29",
+    "python": "3.8.10",
+    "heartbeatAt": "2024-07-03T18:05:47.200365",
+    "startedAt": "2024-07-03T18:05:47.058428",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--data",
+        "custom_data.yaml",
+        "--video_dir",
+        "/home/tony/APS360/baseline/UCY_dataset",
+        "--label_dir",
+        "/home/tony/APS360/baseline/processed_data",
+        "--batch_size",
+        "4",
+        "--epochs",
+        "50",
+        "--log_dir",
+        "/home/tony/APS360/src/runs",
+        "--weights",
+        "/home/tony/APS360/src/yolov8n.pt",
+        "--output_dir",
+        "/home/tony/APS360/output",
+        "--dry_run"
+    ],
+    "state": "running",
+    "program": "/home/tony/APS360/src/model.py",
+    "codePathLocal": null,
+    "codePath": "src/model.py",
+    "git": {
+        "remote": "git@github.com:Tonytheiv/APS360.git",
+        "commit": "39b8b7d12d4d9bd7f3a71a78d4f79aa06212fdc0"
+    },
+    "email": "tonytheiv@icloud.com",
+    "root": "/home/tony/APS360",
+    "host": "guam",
+    "username": "tony",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2968.5209999999997,
+        "min": 800.0,
+        "max": 4900.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3600.0,
+            "min": 800.0,
+            "max": 4900.0
+        },
+        {
+            "current": 3600.0,
+            "min": 800.0,
+            "max": 4900.0
+        },
+        {
+            "current": 3600.0,
+            "min": 800.0,
+            "max": 4900.0
+        },
+        {
+            "current": 3600.0,
+            "min": 800.0,
+            "max": 4900.0
+        },
+        {
+            "current": 3600.0,
+            "min": 800.0,
+            "max": 4900.0
+        },
+        {
+            "current": 3600.0,
+            "min": 800.0,
+            "max": 4900.0
+        },
+        {
+            "current": 3600.0,
+            "min": 800.0,
+            "max": 4900.0
+        },
+        {
+            "current": 906.534,
+            "min": 800.0,
+            "max": 4900.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1813.9995346069336,
+            "used": 1525.8595390319824
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11811160064
+        }
+    ],
+    "memory": {
+        "total": 31.038715362548828
+    }
+}

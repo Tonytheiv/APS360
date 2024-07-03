@@ -1,0 +1,18 @@
+# Paths
+data: /home/tony/APS360/config/custom_data.yaml  # Path to the dataset YAML file
+weights: /home/tony/APS360/src/yolov8n.pt  # Path to YOLOv8 weights
+log_dir: /home/tony/APS360/src/runs  # Directory to save TensorBoard logs
+output_dir: /home/tony/APS360/output  # Directory to save model weights
+
+# Training parameters
+batch_size: 128  # Batch size for training
+epochs: 50  # Number of epochs for training
+
+# Optimization parameters
+optimizer: adam  # Optimizer type
+learning_rate: 0.001  # Learning rate
+
+# Miscellaneous
+train_split: 0.8  # Ratio of training data to total data
+dry_run: true  # Enable dry run to avoid wandb
+
