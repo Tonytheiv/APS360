@@ -23,8 +23,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Fine-tune YOLOv8 for pedestrian tracking")
     parser.add_argument('--config', type=str, default='/home/tony/APS360/config/default.yaml', help='Path to the YAML config file')
     parser.add_argument('--data', type=str, default='/home/tony/APS360/config/custom_data.yaml', help='Path to the dataset YAML file')
-    parser.add_argument('--output_dir', type=str, help='Path to output directory')
-    parser.add_argument('--batch_size', type=int, help='Batch size for training')
+    parser.add_argument('--input_dir', type=str, default='/home/tony/APS360/src/datasets/yolo_ucy', help='Path to output directory')
+    parser.add_argument('--output_dir', type=str, default='/home/tony/APS360/output', help='Path to output directory')
+    parser.add_argument('--batch_size', type=int, default=128, help='Batch size for training')
     parser.add_argument('--epochs', type=int, help='Number of epochs for training')
     parser.add_argument('--log_dir', type=str, help='Directory to save TensorBoard logs')
     parser.add_argument('--weights', type=str, help='Path to YOLOv8 weights')
@@ -40,14 +41,11 @@ def override_config_with_args(config, args):
 def main():
     args = parse_args()
     
-    # Load config from YAML file
     with open(args.config, 'r') as f:
         config = yaml.safe_load(f)
     
-    # Override config with command-line arguments if provided
     config = override_config_with_args(config, args)
 
-    # Disable wandb if dry_run is set
     if args.dry_run:
         os.environ["WANDB_DISABLED"] = "true"
 
@@ -55,18 +53,17 @@ def main():
         transforms.ToTensor(),
     ])
 
-    # Initialize the dataset and dataloader
     train_dataset = PedestrianTrackingDataset(
-        video_dir=os.path.join(args.output_dir, 'train', 'images'),
-        label_dir=os.path.join(args.output_dir, 'train', 'labels'),
-        output_dir=args.output_dir,
+        video_dir=os.path.join(args.input_dir, 'train', 'images'),
+        label_dir=os.path.join(args.input_dir, 'train', 'labels'),
+        output_dir=args.input_dir,
         phase='train',
         transform=transform
     )
     val_dataset = PedestrianTrackingDataset(
-        video_dir=os.path.join(args.output_dir, 'val', 'images'),
-        label_dir=os.path.join(args.output_dir, 'val', 'labels'),
-        output_dir=args.output_dir,
+        video_dir=os.path.join(args.input_dir, 'val', 'images'),
+        label_dir=os.path.join(args.input_dir, 'val', 'labels'),
+        output_dir=args.input_dir,
         phase='val',
         transform=transform
     )
@@ -74,8 +71,9 @@ def main():
     train_dataloader = DataLoader(train_dataset, batch_size=config['batch_size'], shuffle=True, collate_fn=collate_fn)
     val_dataloader = DataLoader(val_dataset, batch_size=config['batch_size'], shuffle=False, collate_fn=collate_fn)
 
-    # Initialize YOLO model
     model = YOLO(config['weights'])
+    
+    model.data = args.data
 
     writer = SummaryWriter(log_dir=config['log_dir'])
 
@@ -97,8 +95,9 @@ def main():
         writer.add_scalar('Loss/train', avg_loss, epoch)
         print(f'Epoch [{epoch + 1}/{config["epochs"]}], Loss: {avg_loss:.4f}')
 
-        if (epoch + 1) % FREQ == 0 or (epoch + 1) == config['epochs']:
-            torch.save(model.state_dict(), os.path.join(config['output_dir'], f'yolov8_epoch{epoch + 1}.pth'))
+        save_path = os.path.join(config['output_dir'], f'yolov8_epoch{epoch + 1}.pth')
+        torch.save(model.state_dict(), save_path)
+        print(f"Model weights saved to: {save_path}")
 
     writer.close()
 
