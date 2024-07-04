@@ -64,12 +64,12 @@ APS360
 
 1. **Clone the repository**:
 
-   ```bash
-   git clone git@github.com:Tonytheiv/APS360.git
-   cd APS360
-   ```
+```bash
+git clone git@github.com:Tonytheiv/APS360.git
+cd APS360
+```
 2. **Create a python environment**
-  ```bash
+```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
