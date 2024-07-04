@@ -101,8 +101,8 @@ pip install ultralytics
    val: /home/tony/APS360/src/datasets/yolo_ucy/val/images
    test: /home/tony/APS360/src/datasets/yolo_ucy/test/images
 
-   nc: 1  # Number of classes
-   names: ['pedestrian']  # Class names
+   nc: 100  # Number of classes
+   names: ['', '', ...]  # Class names
    ```
    
    `default.yaml` (example):
