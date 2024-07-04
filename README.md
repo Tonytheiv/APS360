@@ -20,32 +20,33 @@ This project fine-tunes the YOLOv8 model for pedestrian tracking. It includes sc
 
 ### Project Structure
 APS360
-
+```
 ├── config/
 
-│ ├── custom_data.yaml
+│      ├── custom_data.yaml
 
-│ ├── default.yaml
+│      ├── default.yaml
 
 ├── launch/
 
-│ ├── train.sh
+│      ├── train.sh
 
 ├── baseline/
 
-│ ├── UCY_dataset/
+│      ├── UCY_dataset/
 
-│ ├── processed_data/
+│      ├── processed_data/
 
 ├── src/
 
-│ ├── data.py
+│      ├── data.py
 
-│ ├── model.py
+│      ├── model.py
 
-│ ├── datasets/
+│      ├── datasets/
 
-│ │ ├── yolo_ucy/
+│      │              ├── yolo_ucy/
+```
 
 ### Requirements
 
@@ -102,12 +103,54 @@ pip install ultralytics
 
    nc: 1  # Number of classes
    names: ['pedestrian']  # Class names
-      `default.yaml` (example):
-
+   ```
+   
+   `default.yaml` (example):
    ```yaml
    batch_size: 16
    epochs: 100
    log_dir: /home/tony/APS360/runs
    weights: /home/tony/APS360/src/yolov8n.pt
+   ```
 
+### Usage
+
+1. **Prepare the data**:
+
+   Run the `data.py` script to extract frames and generate labels in the correct format:
+
+   ```bash
+   python src/data.py
+
+2. **Train the model**:
+
+   Run the `train.sh` script to start training the YOLOv8 model:
+
+   ```bash
+   bash launch/train.sh
+
+3. **TensorBoard**:
+
+   Start TensorBoard to visualize training progress:
+
+   ```bash
+   tensorboard --logdir /home/tony/APS360/runs
+
+### File Descriptions
+
+- `src/data.py`: Prepares the dataset by extracting frames from videos and generating labels in YOLO format.
+- `src/model.py`: Script to fine-tune the YOLOv8 model using the prepared dataset.
+- `config/custom_data.yaml`: YAML file specifying the dataset paths.
+- `config/default.yaml`: YAML file specifying training configurations.
+- `launch/train.sh`: Shell script to run the training process.
+
+### Notes
+
+- Ensure the dataset paths in `custom_data.yaml` and the training configurations in `default.yaml` are correctly set before running the scripts.
+- The data preparation script only needs to be run once unless the dataset changes.
+
+
+   
+
+   
    
