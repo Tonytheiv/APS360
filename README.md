@@ -12,14 +12,14 @@ Running `baseline.ipynb` will use cv2 centroid tracking and frame differencing t
 
 The `maxDissapeared` argument in `CentroidTracker()` will change how long objects persist in "memory." Line 84 in cell 1 in `baseline.ipynb` sets this to 0; the default is 50.
 
-## YOLOv8 Pedestrian Tracking
+## Pedestrian Tracking & deepSORT
 
 ### Overview
 
 This project fine-tunes the YOLOv8 model for pedestrian tracking. It includes scripts to preprocess the data, train the model, and visualize the results.
 
 ### Project Structure
-APS360
+PARENT
 ```
 ├── config/
 
